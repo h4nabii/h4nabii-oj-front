@@ -3,6 +3,7 @@
 const state = () => ({
   loginUser: {
     username: "未登录",
+    role: "notLogin",
   },
 });
 
@@ -19,7 +20,7 @@ export default {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     async getLoginUser({ commit, state }, payload) {
-      commit("updateUser", { username: "H4nabii" });
+      commit("updateUser", payload);
     },
   },
 

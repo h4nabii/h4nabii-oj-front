@@ -63,8 +63,9 @@ const onMenuClick = (key: string) => {
 setTimeout(() => {
   store.dispatch("user/getLoginUser", {
     username: "h4nabii",
+    role: "admin",
   });
-}, 3000);
+}, 5000);
 </script>
 
 <style scoped>
