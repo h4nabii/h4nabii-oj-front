@@ -1,33 +1,53 @@
 <template>
-  <div id="globalHeader">
-    <a-menu
-      mode="horizontal"
-      :selected-keys="selectedKeys"
-      @menu-item-click="onMenuClick"
-    >
-      <a-menu-item
-        key="0"
-        :style="{ padding: 0, marginRight: '38px' }"
-        disabled
+  <!-- 栅格布局 -->
+  <a-row
+    id="globalHeader"
+    class="grid-demo"
+    style="margin-bottom: 16px"
+    align="center"
+  >
+    <!-- 菜单栏 -->
+    <a-col flex="auto">
+      <!-- 菜单布局 -->
+      <a-menu
+        mode="horizontal"
+        :selected-keys="selectedKeys"
+        @menu-item-click="onMenuClick"
       >
-        <div class="title-bar">
-          <img class="logo" src="../assets/logo.png" alt="" />
-          <div class="title">花火OJ</div>
-        </div>
-      </a-menu-item>
-      <a-menu-item v-for="item in routes" :key="item.path">
-        {{ item.name }}
-      </a-menu-item>
-    </a-menu>
-  </div>
+        <!-- 图标 -->
+        <a-menu-item
+          key="0"
+          :style="{ padding: 0, marginRight: '38px' }"
+          disabled
+        >
+          <div class="title-bar">
+            <img class="logo" src="../assets/logo.png" alt="" />
+            <div class="title">花火OJ</div>
+          </div>
+        </a-menu-item>
+        <a-menu-item v-for="item in routes" :key="item.path">
+          {{ item.name }}
+        </a-menu-item>
+      </a-menu>
+    </a-col>
+
+    <!-- 用户信息 -->
+    <a-col flex="100px">
+      <div>
+        {{ store.state.user?.loginUser?.username }}
+      </div>
+    </a-col>
+  </a-row>
 </template>
 
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import { routes } from "@/router/routes";
 import { ref } from "vue";
+import { useStore } from "vuex";
 
 const router = useRouter();
+const store = useStore();
 
 const selectedKeys = ref(["/"]);
 router.afterEach((to /* to, from, failure */) => {
@@ -39,6 +59,12 @@ const onMenuClick = (key: string) => {
     path: key,
   });
 };
+
+setTimeout(() => {
+  store.dispatch("user/getLoginUser", {
+    username: "h4nabii",
+  });
+}, 3000);
 </script>
 
 <style scoped>

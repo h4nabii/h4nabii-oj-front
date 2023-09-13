@@ -21,8 +21,8 @@
 }
 
 #basic-layout .header {
-  background-color: skyblue;
   margin-bottom: 16px;
+  box-shadow: #eee 1px 1px 5px;
 }
 
 #basic-layout .content {
