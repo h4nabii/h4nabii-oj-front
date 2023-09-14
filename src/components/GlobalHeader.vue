@@ -20,7 +20,13 @@
             <div class="title">花火OJ</div>
           </div>
         </a-menu-item>
-        <a-menu-item v-for="item in routes" :key="item.path">
+        <!-- v-for 和 v-if 不应该一起使用 -->
+        <!--<div v-for="item in routes" :key="item.path">-->
+        <!--  <a-menu-item v-if="!item.meta?.hideInMenu">-->
+        <!--    {{ item.name }}-->
+        <!--  </a-menu-item>-->
+        <!--</div>-->
+        <a-menu-item v-for="item in visibleRoutes" :key="item.path">
           {{ item.name }}
         </a-menu-item>
       </a-menu>
@@ -43,6 +49,10 @@ import { useStore } from "vuex";
 
 const router = useRouter();
 const store = useStore();
+
+const visibleRoutes = routes.filter((route) => {
+  return !route.meta?.hideInMenu;
+});
 
 const selectedKeys = ref(["/"]);
 router.afterEach((to /* to, from, failure */) => {
