@@ -1,11 +1,6 @@
 <template>
   <!-- 栅格布局 -->
-  <a-row
-    id="globalHeader"
-    class="grid-demo"
-    style="margin-bottom: 16px"
-    align="center"
-  >
+  <a-row id="globalHeader" class="grid-demo" align="center" :wrap="false">
     <!-- 菜单栏 -->
     <a-col flex="auto">
       <!-- 菜单布局 -->
