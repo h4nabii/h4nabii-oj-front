@@ -1,9 +1,11 @@
 // initial state
 // 存储状态
+import ACCESSES from "@/access/ACCESSES";
+
 const state = () => ({
   loginUser: {
     username: "未登录",
-    role: "notLogin",
+    role: ACCESSES.NOT_LOGIN,
   },
 });
 

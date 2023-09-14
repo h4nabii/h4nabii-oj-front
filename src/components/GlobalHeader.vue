@@ -44,14 +44,25 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import { routes } from "@/router/routes";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import checkAccess from "@/access/checkAccess";
+import ACCESSES from "@/access/ACCESSES";
 
 const router = useRouter();
 const store = useStore();
 
-const visibleRoutes = routes.filter((route) => {
-  return !route.meta?.hideInMenu;
+const visibleRoutes = computed(() => {
+  return routes.filter((route) => {
+    if (route.meta?.hideInMenu) return false;
+    if (
+      // store.state.user.loginUser 不应该赋值给其他变量，否则不会触发属性计算
+      !checkAccess(store.state.user.loginUser, route.meta?.access as string)
+    ) {
+      return false;
+    }
+    return true;
+  });
 });
 
 const selectedKeys = ref(["/"]);
@@ -68,7 +79,7 @@ const onMenuClick = (key: string) => {
 setTimeout(() => {
   store.dispatch("user/getLoginUser", {
     username: "h4nabii",
-    role: "admin",
+    role: ACCESSES.ADMIN,
   });
 }, 5000);
 </script>

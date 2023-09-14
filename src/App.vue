@@ -17,7 +17,6 @@ const router = useRouter();
 const store = useStore();
 
 router.beforeEach((to, from, next) => {
-  console.log(store.state.user.loginUser?.role);
   if (to.meta?.access === "canAdmin") {
     if (store.state.user.loginUser?.role !== "admin") {
       next("/noAuth");
