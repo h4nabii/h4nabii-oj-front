@@ -1,7 +1,12 @@
 <template>
   <div id="user-layout">
     <a-layout style="min-height: 100vh">
-      <a-layout-header class="header"> 用户布局</a-layout-header>
+      <a-layout-header class="header">
+        <a-space>
+          <img src="../assets/logo.png" class="logo" alt="logo" />
+          <div>花火OJ</div>
+        </a-space>
+      </a-layout-header>
 
       <a-layout-content class="content">
         <router-view />
@@ -16,21 +21,25 @@
 
 <style scoped>
 #user-layout {
+  text-align: center;
+  background: url("../assets/background.jpg") 0 0/100% 100%;
+}
+
+#user-layout .logo {
+  width: 64px;
+  height: 64px;
 }
 
 #user-layout .header {
-  margin-bottom: 16px;
-  box-shadow: #eee 1px 1px 5px;
+  margin-top: 16px;
 }
 
 #user-layout .content {
-  background: linear-gradient(to right, #ddd, #fff);
   margin-bottom: 16px;
   padding: 20px;
 }
 
 #user-layout .footer {
-  background-color: #efefef;
   padding: 16px;
 
   /* 底部居中 */
@@ -41,6 +50,4 @@
   text-align: center;
 }
 </style>
-<script setup lang="ts">
-import GlobalHeader from "@/components/GlobalHeader.vue";
-</script>
+<script setup lang="ts"></script>

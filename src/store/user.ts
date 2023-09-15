@@ -1,7 +1,7 @@
 // initial state
 // 存储状态
 import ACCESSES from "@/access/ACCESSES";
-import { UserControllerService } from "../../generated";
+import { LoginUserVO, UserControllerService } from "../../generated";
 
 const state = () => ({
   loginUser: {
@@ -25,7 +25,9 @@ export default {
       const res = await UserControllerService.getLoginUserUsingGet();
       console.log(res);
       if (res.code === 0) {
-        commit("updateUser", res.data);
+        const { userRole: role, userName: username } = res.data as LoginUserVO;
+        console.log(role, username);
+        commit("updateUser", { role, username });
       } else {
         commit("updateUser", { ...state.loginUser, role: ACCESSES.NOT_LOGIN });
       }
