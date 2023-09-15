@@ -1,4 +1,4 @@
-import { createStore } from "vuex";
+import { createStore, Store } from "vuex";
 import user from "./user";
 
 export default createStore({

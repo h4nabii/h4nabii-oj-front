@@ -76,12 +76,12 @@ const onMenuClick = (key: string) => {
   });
 };
 
-setTimeout(() => {
-  store.dispatch("user/getLoginUser", {
-    username: "h4nabii",
-    role: ACCESSES.ADMIN,
-  });
-}, 5000);
+// setTimeout(() => {
+//   store.dispatch("user/getLoginUser", {
+//     username: "h4nabii",
+//     role: ACCESSES.ADMIN,
+//   });
+// }, 5000);
 </script>
 
 <style scoped>

@@ -1,11 +1,11 @@
 // initial state
 // 存储状态
 import ACCESSES from "@/access/ACCESSES";
+import { UserControllerService } from "../../generated";
 
 const state = () => ({
   loginUser: {
     username: "未登录",
-    role: ACCESSES.NOT_LOGIN,
   },
 });
 
@@ -22,7 +22,13 @@ export default {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     async getLoginUser({ commit, state }, payload) {
-      commit("updateUser", payload);
+      const res = await UserControllerService.getLoginUserUsingGet();
+      console.log(res);
+      if (res.code === 0) {
+        commit("updateUser", res.data);
+      } else {
+        commit("updateUser", { ...state.loginUser, role: ACCESSES.NOT_LOGIN });
+      }
     },
   },
 
