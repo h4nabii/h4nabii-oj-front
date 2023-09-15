@@ -12,10 +12,9 @@
     "useDefineForClassFields": true,
     "sourceMap": true,
     "baseUrl": ".",
-    /* 引入所有的类型声明文件 */
-    //    "types": [
-    //      "webpack-env"
-    //    ],
+    "types": [
+      "webpack-env"
+    ],
     "paths": {
       "@/*": [
         "src/*"
