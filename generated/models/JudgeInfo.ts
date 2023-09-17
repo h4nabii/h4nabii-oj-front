@@ -3,7 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type UserLoginRequest = {
-    userAccount?: string;
-    userPassword?: string;
+export type JudgeInfo = {
+    memoryLimit?: number;
+    message?: number;
+    time?: number;
 };

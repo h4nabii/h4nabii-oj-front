@@ -3,15 +3,15 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type UserQueryRequest = {
+export type QuestionQueryRequest = {
+    answer?: string;
+    content?: string;
     current?: number;
     id?: number;
-    mpOpenId?: string;
     pageSize?: number;
     sortField?: string;
     sortOrder?: string;
-    unionId?: string;
-    userName?: string;
-    userProfile?: string;
-    userRole?: string;
+    tags?: Array<string>;
+    title?: string;
+    userId?: number;
 };
