@@ -3,6 +3,7 @@
     id="md-editor"
     :value="value"
     :plugins="plugins"
+    :mode="mode"
     @change="handleChange"
   />
 </template>
@@ -15,12 +16,14 @@ import { defineProps, withDefaults } from "vue";
 
 interface Props {
   value: string;
+  mode: string;
   handleChange: (v: string) => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = withDefaults(defineProps<Props>(), {
   value: () => "",
+  mode: () => "split",
   handleChange: (v: string) => {
     console.log(v);
   },
@@ -32,3 +35,11 @@ const plugins = [
   // Add more plugins here
 ];
 </script>
+
+<style>
+// 移除尾部的全屏与链接
+.bytemd-toolbar-icon.bytemd-tippy.bytemd-tippy-right:nth-child(5),
+.bytemd-toolbar-icon.bytemd-tippy.bytemd-tippy-right:nth-child(6) {
+  display: none;
+}
+</style>
