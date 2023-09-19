@@ -5,10 +5,11 @@
     :data="dataList"
     :pagination="{
       pageSize: searchParams.pageSize,
-      current: searchParams.pageNum,
+      current: searchParams.current,
       total,
       showTotal: true,
     }"
+    @page-change="onPageChange"
   >
     <template #optional="{ record }">
       <a-button type="primary" @click="doUpdate(record)">修改</a-button>
@@ -18,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watchEffect } from "vue";
 import { Question, QuestionControllerService } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";
@@ -26,10 +27,9 @@ import { useRouter } from "vue-router";
 const dataList = ref([]);
 const total = ref(0);
 const searchParams = ref({
-  pageSize: 10,
-  pageNum: 1,
+  pageSize: 2,
+  current: 1,
 });
-
 const loadData = async () => {
   const res = await QuestionControllerService.listQuestionByPageUsingPost(
     searchParams.value
@@ -42,6 +42,10 @@ const loadData = async () => {
     message.error("加载失败" + res.message);
   }
 };
+
+watchEffect(() => {
+  loadData();
+});
 
 const router = useRouter();
 
@@ -64,6 +68,13 @@ const doDelete = async (record: Question) => {
   } else {
     message.error("删除失败", res.message);
   }
+};
+
+const onPageChange = (page: number) => {
+  searchParams.value = {
+    ...searchParams.value,
+    current: page,
+  };
 };
 
 onMounted(() => {

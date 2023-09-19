@@ -1,6 +1,5 @@
 import { RouteRecordRaw } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
-import AdminView from "@/views/AdminView.vue";
 import NoAuthView from "@/views/NoAuthView.vue";
 import ACCESSES from "@/access/ACCESSES";
 import UserLayout from "@/layouts/UserLayout.vue";
@@ -8,6 +7,7 @@ import UserLoginView from "@/views/user/UserLoginView.vue";
 import UserRegisterView from "@/views/user/UserRegisterView.vue";
 import AddQuestionView from "@/views/question/AddQuestionView.vue";
 import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
+import AboutView from "@/views/AboutView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -35,7 +35,7 @@ export const routes: Array<RouteRecordRaw> = [
     name: "创建题目",
     component: AddQuestionView,
     meta: {
-      access: ACCESSES.ADMIN,
+      access: ACCESSES.USER,
     },
   },
   {
@@ -43,7 +43,7 @@ export const routes: Array<RouteRecordRaw> = [
     name: "管理题目",
     component: ManageQuestionView,
     meta: {
-      access: ACCESSES.ADMIN,
+      access: ACCESSES.USER,
     },
   },
   {
@@ -52,6 +52,7 @@ export const routes: Array<RouteRecordRaw> = [
     component: AddQuestionView,
     meta: {
       access: ACCESSES.ADMIN,
+      hideInMenu: true,
     },
   },
   {
@@ -60,33 +61,16 @@ export const routes: Array<RouteRecordRaw> = [
     component: HomeView,
   },
   {
-    path: "/hidden",
-    name: "隐藏页面",
-    component: HomeView,
+    path: "/noAuth",
+    name: "无权限",
+    component: NoAuthView,
     meta: {
       hideInMenu: true,
     },
   },
   {
-    path: "/noAuth",
-    name: "NoAuth",
-    component: NoAuthView,
-  },
-  {
-    path: "/admin",
-    name: "管理员可见",
-    component: AdminView,
-    meta: {
-      access: ACCESSES.ADMIN,
-    },
-  },
-  {
     path: "/about",
     name: "关于我的",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    component: AboutView,
   },
 ];
