@@ -6,6 +6,7 @@
 import * as monaco from "monaco-editor";
 import { editor } from "monaco-editor";
 import { defineProps, onMounted, ref, toRaw, watch, withDefaults } from "vue";
+import ITextModel = editor.ITextModel;
 
 const codeEditorDOM = ref<HTMLElement>();
 const codeEditor = ref<editor.IStandaloneCodeEditor>();
@@ -28,22 +29,12 @@ const props = withDefaults(defineProps<Props>(), {
 watch(
   () => props.language,
   () => {
-    if (!codeEditorDOM.value) return;
-
-    codeEditor.value = monaco.editor.create(codeEditorDOM.value, {
-      value: props.value,
-      language: "html",
-      automaticLayout: true,
-      colorDecorators: true,
-      minimap: {
-        enabled: true,
-      },
-      readOnly: false,
-      theme: "vs-dark",
-      // lineNumbers: "off",
-      // roundedSelection: false,
-      // scrollBeyondLastLine: false,
-    });
+    if (codeEditor.value) {
+      monaco.editor.setModelLanguage(
+        toRaw(codeEditor.value).getModel() as ITextModel,
+        props.language
+      );
+    }
   }
 );
 
