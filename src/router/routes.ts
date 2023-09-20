@@ -1,5 +1,4 @@
 import { RouteRecordRaw } from "vue-router";
-import HomeView from "@/views/HomeView.vue";
 import NoAuthView from "@/views/NoAuthView.vue";
 import ACCESSES from "@/access/ACCESSES";
 import UserLayout from "@/layouts/UserLayout.vue";
@@ -8,8 +7,15 @@ import UserRegisterView from "@/views/user/UserRegisterView.vue";
 import AddQuestionView from "@/views/question/AddQuestionView.vue";
 import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
 import AboutView from "@/views/AboutView.vue";
+import QuestionsView from "@/views/question/QuestionsView.vue";
+import ViewQuestionsView from "@/views/question/ViewQuestionsView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
+  {
+    path: "/",
+    name: "主页",
+    component: QuestionsView,
+  },
   {
     path: "/user",
     name: "用户",
@@ -47,6 +53,21 @@ export const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: "/questions",
+    name: "浏览题目",
+    component: QuestionsView,
+  },
+  {
+    path: "/view/questions/:id",
+    name: "在线做题",
+    component: ViewQuestionsView,
+    props: true,
+    meta: {
+      hideInMen: true,
+      access: ACCESSES.USER,
+    },
+  },
+  {
     path: "/update/question",
     name: "更新题目",
     component: AddQuestionView,
@@ -54,11 +75,6 @@ export const routes: Array<RouteRecordRaw> = [
       access: ACCESSES.ADMIN,
       hideInMenu: true,
     },
-  },
-  {
-    path: "/",
-    name: "浏览题目",
-    component: HomeView,
   },
   {
     path: "/noAuth",
