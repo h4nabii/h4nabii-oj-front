@@ -1,25 +1,20 @@
 <template>
-  <!-- 栅格布局 -->
-  <a-row id="globalHeader" class="grid-demo" align="center" :wrap="false">
+  <a-row id="global-header" align="center" :wrap="false">
+    <!-- 图标 -->
+    <a-col flex="160px" style="padding: 0 10px">
+      <div class="title-bar">
+        <img class="logo" src="../assets/logo.png" alt="" />
+        <div class="title">花火OJ</div>
+      </div>
+    </a-col>
+
     <!-- 菜单栏 -->
     <a-col flex="auto">
-      <!-- 菜单布局 -->
       <a-menu
         mode="horizontal"
         :selected-keys="selectedKeys"
         @menu-item-click="onMenuClick"
       >
-        <!-- 图标 -->
-        <a-menu-item
-          key="0"
-          :style="{ padding: 0, marginRight: '38px' }"
-          disabled
-        >
-          <div class="title-bar">
-            <img class="logo" src="../assets/logo.png" alt="" />
-            <div class="title">花火OJ</div>
-          </div>
-        </a-menu-item>
         <!-- v-for 和 v-if 不应该一起使用 -->
         <!--<div v-for="item in routes" :key="item.path">-->
         <!--  <a-menu-item v-if="!item.meta?.hideInMenu">-->
@@ -35,29 +30,31 @@
     <!-- 用户信息 -->
     <a-col flex="100px">
       <div>
-        {{ store.state.user?.loginUser?.username }}
+        {{ store.state.loginUser.userName }}
       </div>
     </a-col>
   </a-row>
 </template>
 
 <script setup lang="ts">
+import { computed, ref } from "vue";
+import { useStore } from "@/store";
 import { useRouter } from "vue-router";
 import { routes } from "@/router/routes";
-import { computed, ref } from "vue";
-import { useStore } from "vuex";
-import checkAccess from "@/access/checkAccess";
 import ACCESSES from "@/access/ACCESSES";
+import checkAccess from "@/access/checkAccess";
 
 const router = useRouter();
 const store = useStore();
 
+const selectedKeys = ref(["/"]);
+
 const visibleRoutes = computed(() => {
   return routes.filter((route) => {
-    if (route.meta?.hideInMenu) return false;
+    if (route.meta?.hideInMenu as boolean) return false;
     if (
       // store.state.user.loginUser 不应该赋值给其他变量，否则不会触发属性计算
-      !checkAccess(store.state.user.loginUser, route.meta?.access as string)
+      !checkAccess(store.state.loginUser, route.meta?.access as ACCESSES)
     ) {
       return false;
     }
@@ -65,7 +62,6 @@ const visibleRoutes = computed(() => {
   });
 });
 
-const selectedKeys = ref(["/"]);
 router.afterEach((to /* to, from, failure */) => {
   selectedKeys.value = [to.path];
 });
@@ -77,7 +73,7 @@ const onMenuClick = (key: string) => {
 };
 
 // setTimeout(() => {
-//   store.dispatch("user/getLoginUser", {
+//   store.dispatch("getLoginUser", {
 //     username: "h4nabii",
 //     role: ACCESSES.ADMIN,
 //   });
