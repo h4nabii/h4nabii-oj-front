@@ -1,21 +1,30 @@
 <template>
-  <h1>管理题目</h1>
-  <a-table
-    :columns="columns"
-    :data="dataList"
-    :pagination="{
-      pageSize: searchParams.pageSize,
-      current: searchParams.current,
-      total,
-      showTotal: true,
-    }"
-    @page-change="onPageChange"
-  >
-    <template #optional="{ record }">
-      <a-button type="primary" @click="doUpdate(record)">修改</a-button>
-      <a-button status="danger" @click="doDelete(record)">删除</a-button>
-    </template>
-  </a-table>
+  <div id="manage-question-view">
+    <h1>管理题目</h1>
+    <a-table
+      :columns="columns"
+      :data="dataList"
+      :pagination="{
+        pageSize: searchParams.pageSize,
+        current: searchParams.current,
+        total,
+        showTotal: true,
+      }"
+      @page-change="onPageChange"
+    >
+      <template #optional="{ record }">
+        <div style="min-width: 130px">
+          <a-button
+            style="margin-right: 10px"
+            type="primary"
+            @click="doUpdate(record)"
+            >修改
+          </a-button>
+          <a-button status="danger" @click="doDelete(record)">删除</a-button>
+        </div>
+      </template>
+    </a-table>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -27,7 +36,7 @@ import { useRouter } from "vue-router";
 const dataList = ref([]);
 const total = ref(0);
 const searchParams = ref({
-  pageSize: 2,
+  pageSize: 10,
   current: 1,
 });
 const loadData = async () => {
@@ -133,4 +142,7 @@ const columns = [
 ];
 </script>
 
-<style></style>
+<style>
+#manage-question-view {
+}
+</style>
