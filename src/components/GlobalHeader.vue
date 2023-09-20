@@ -52,13 +52,7 @@ const selectedKeys = ref(["/"]);
 const visibleRoutes = computed(() => {
   return routes.filter((route) => {
     if (route.meta?.hideInMenu as boolean) return false;
-    if (
-      // store.state.user.loginUser 不应该赋值给其他变量，否则不会触发属性计算
-      !checkAccess(store.state.loginUser, route.meta?.access as ACCESSES)
-    ) {
-      return false;
-    }
-    return true;
+    return checkAccess(store.state.loginUser, route.meta?.access as ACCESSES);
   });
 });
 
