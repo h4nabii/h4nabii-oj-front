@@ -26,8 +26,9 @@
 }
 
 #basic-layout .content {
-  background: linear-gradient(to right, #ddd, #fff);
-  margin-bottom: 16px;
+  /* background: linear-gradient(to right, #ddd, #fff);  */
+  /* max-width: 1400px; */
+  /* margin: 0 auto; */
   padding: 20px;
 }
 
