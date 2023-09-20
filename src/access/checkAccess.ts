@@ -1,7 +1,11 @@
 import ACCESSES from "@/access/ACCESSES";
+import { LoginUserVO } from "../../generated";
 
-const checkAccess = (loginUser: any, accessRequired = ACCESSES.NOT_LOGIN) => {
-  const loginUserAccess = loginUser?.role ?? ACCESSES.NOT_LOGIN;
+const checkAccess = (
+  loginUser: LoginUserVO,
+  accessRequired = ACCESSES.NOT_LOGIN
+) => {
+  const loginUserAccess = loginUser?.userRole ?? ACCESSES.NOT_LOGIN;
   if (accessRequired === ACCESSES.NOT_LOGIN) {
     return true;
   }
