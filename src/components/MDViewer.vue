@@ -1,32 +1,20 @@
 <template>
-  <Editor
-    id="md-editor"
-    :value="value"
-    :plugins="plugins"
-    :mode="mode"
-    @change="handleChange"
-  />
+  <Viewer id="md-viewer" :value="value" :plugins="plugins" />
 </template>
 
 <script setup lang="ts">
 import gfm from "@bytemd/plugin-gfm";
 import highlight from "@bytemd/plugin-highlight";
-import { Editor } from "@bytemd/vue-next";
+import { Viewer } from "@bytemd/vue-next";
 import { defineProps, withDefaults } from "vue";
 
 interface Props {
   value: string;
-  mode: string;
-  handleChange: (v: string) => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = withDefaults(defineProps<Props>(), {
   value: () => "",
-  mode: () => "split",
-  handleChange: (v: string) => {
-    console.log(v);
-  },
 });
 
 const plugins = [
