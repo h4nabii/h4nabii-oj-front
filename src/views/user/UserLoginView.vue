@@ -44,7 +44,7 @@ const store = useStore();
 const handleSubmit = async () => {
   const res = await UserControllerService.userLoginUsingPost(form);
   if (res.code === 0) {
-    await store.dispatch("user/getLoginUser");
+    await store.dispatch("getLoginUser");
     router.push({
       path: "/",
       replace: true,
