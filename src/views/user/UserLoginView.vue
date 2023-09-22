@@ -31,7 +31,7 @@ import { reactive } from "vue";
 import { UserControllerService, UserLoginRequest } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";
-import { useStore } from "vuex";
+import { useStore } from "@/store";
 
 const form = reactive({
   userAccount: "",
@@ -45,7 +45,7 @@ const handleSubmit = async () => {
   const res = await UserControllerService.userLoginUsingPost(form);
   if (res.code === 0) {
     await store.dispatch("getLoginUser");
-    router.push({
+    await router.push({
       path: "/",
       replace: true,
     });
