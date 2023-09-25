@@ -1,6 +1,6 @@
 import { InjectionKey } from "vue";
 import { createStore, useStore as baseUseStore, Store } from "vuex";
-import { LoginUserVO, UserControllerService } from "../../generated";
+import { LoginUserVO, UserControllerService } from "@/request";
 import ACCESSES from "@/access/ACCESSES";
 
 export interface State {

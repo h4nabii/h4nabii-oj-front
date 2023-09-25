@@ -1,5 +1,5 @@
 import ACCESSES from "@/access/ACCESSES";
-import { LoginUserVO } from "../../generated";
+import { LoginUserVO } from "@/request";
 
 const checkAccess = (
   loginUser: LoginUserVO,

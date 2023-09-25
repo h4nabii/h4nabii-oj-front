@@ -69,7 +69,7 @@ import {
   QuestionSubmitAddRequest,
   QuestionSubmitControllerService,
   QuestionVO,
-} from "../../../generated";
+} from "@/request";
 import message from "@arco-design/web-vue/es/message";
 import MDViewer from "@/components/MDViewer.vue";
 import CodeEditor from "@/components/CodeEditor.vue";

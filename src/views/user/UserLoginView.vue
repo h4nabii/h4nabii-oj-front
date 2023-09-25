@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 import { reactive } from "vue";
-import { UserControllerService, UserLoginRequest } from "../../../generated";
+import { UserControllerService, UserLoginRequest } from "@/request";
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";
 import { useStore } from "@/store";

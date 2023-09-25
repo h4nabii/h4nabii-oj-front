@@ -119,7 +119,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import MDEditor from "@/components/MDEditor.vue";
-import { QuestionControllerService } from "../../../generated";
+import { QuestionControllerService } from "@/request";
 import message from "@arco-design/web-vue/es/message";
 import { useRoute } from "vue-router";
 
